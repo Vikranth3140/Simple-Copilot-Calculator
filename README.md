@@ -8,6 +8,8 @@ This project serves as a test use of GitHub Copilot to evaluate its capabilities
 
 You can view the chat here - [link.md](link.md)
 
+You can view the website here - [vikranth3140.github.io/Simple-Copilot-Calculator](https://vikranth3140.github.io/Simple-Copilot-Calculator/)
+
 ## Features
 
 - Basic arithmetic operations: addition, subtraction, multiplication, and division
