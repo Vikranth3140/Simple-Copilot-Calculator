@@ -25,7 +25,7 @@ You can view the website here - [vikranth3140.github.io/Simple-Copilot-Calculato
 
 2. Navigate to the project directory:
     ```sh
-    cd simple-calculator
+    cd Simple-Copilot-Calculator
     ```
 
 3. Open `index.html` in your web browser to use the calculator.
