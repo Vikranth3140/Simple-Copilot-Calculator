@@ -6,6 +6,8 @@ This is a basic calculator built using HTML, CSS, and JavaScript.
 
 This project serves as a test use of GitHub Copilot to evaluate its capabilities and performance in generating code. The calculator supports basic arithmetic operations including addition, subtraction, multiplication, and division.
 
+You can view the chat here - [link.md](link.md)
+
 ## Features
 
 - Basic arithmetic operations: addition, subtraction, multiplication, and division
