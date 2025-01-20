@@ -38,4 +38,4 @@ You can view the website here - [vikranth3140.github.io/Simple-Copilot-Calculato
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
