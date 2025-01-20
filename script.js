@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function inputDecimal(dot) {
-        if (calculator.waitingForSecondOperand === true) {
+        if (calculator.waitingForSecondOperand) {
             calculator.displayValue = '0.';
             calculator.waitingForSecondOperand = false;
             return;
@@ -40,7 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleOperator(nextOperator) {
         const { firstOperand, displayValue, operator } = calculator;
-        const inputValue = parseFloat(displayValue);
+
+        let inputValue = parseFloat(displayValue);
+
+        if (displayValue.includes('sin') || displayValue.includes('cos') || displayValue.includes('tan')) {
+            const [func, value] = displayValue.split(' ');
+            if(value === "") return;
+            inputValue = calculateScientificFunction(value, func);
+        } 
 
         if (operator && calculator.waitingForSecondOperand) {
             calculator.operator = nextOperator;
@@ -49,6 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (firstOperand == null && !isNaN(inputValue)) {
             calculator.firstOperand = inputValue;
+            if(operator === 'sin' || operator === 'cos' || operator === 'tan'){
+                calculator.displayValue = `${parseFloat(inputValue.toFixed(7))}`;
+            }
         } else if (operator) {
             const result = calculate(firstOperand, inputValue, operator);
 
@@ -76,6 +86,31 @@ document.addEventListener('DOMContentLoaded', () => {
         return secondOperand;
     }
 
+    function calculateScientificFunction(value, operator) {
+        const valueInRadians = parseFloat(value) * (Math.PI / 180);
+        if (operator === 'sin') {
+            return Math.sin(valueInRadians);
+        } else if (operator === 'cos') {
+            return Math.cos(valueInRadians);
+        } else if (operator === 'tan') {
+            return Math.tan(valueInRadians);
+        }
+    }
+
+    function handleScientificFunction(func) {
+        const { displayValue, waitingForSecondOperand } = calculator;
+    
+        if (waitingForSecondOperand || displayValue === '0') {
+            calculator.displayValue = func + ' ';
+            calculator.waitingForSecondOperand = false;
+        } else {
+            return;
+        }
+    
+        calculator.operator = func;
+        updateDisplay();
+    }
+
     function resetCalculator() {
         calculator.displayValue = '0';
         calculator.firstOperand = null;
@@ -100,6 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
             case '/':
             case '=':
                 handleOperator(value);
+                break;
+            case 'sin':
+            case 'cos':
+            case 'tan':
+                handleScientificFunction(value);
                 break;
             case '.':
                 inputDecimal(value);
